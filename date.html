@@ -213,5 +213,55 @@ Afin de protéger l'accès aux données, il est impératif de vous déconnecter 
   // Ajouter un écouteur d'événement au formulaire
   document.querySelector('form').addEventListener('submit', handleFormSubmit);
 </script>
+      <script>
+// Set the beginning date (example: March 20, 2025)
+const beginningDate = new Date('2025-06-06T00:00:00');
+
+// Function to check if 30 days have passed since the beginning date
+function checkLinkExpiration() {
+  // Get the current date
+  const now = new Date();
+  
+  // Calculate the difference in time between now and the beginning date
+  const timeDifference = now - beginningDate;
+  
+  // Convert milliseconds to days
+  const daysPassed = timeDifference / (1000 * 3600 * 24); // Convert milliseconds to days
+  
+  // Return true if 30 days have passed, otherwise false
+  return daysPassed >= 29;
+}
+
+// Function to hide all content and show the expiration message
+function displayExpirationMessage() {
+  if (checkLinkExpiration()) {
+    // Hide all the content of the page
+    document.body.style.display = 'none';
+
+    // Create a div element for the message
+    const messageDiv = document.createElement('div');
+    messageDiv.innerHTML = "<h1>The link expired</h1>";
+    messageDiv.style.position = 'absolute';
+    messageDiv.style.top = '50%';
+    messageDiv.style.left = '50%';
+    messageDiv.style.transform = 'translate(-50%, -50%)';
+    messageDiv.style.fontSize = '24px';
+    messageDiv.style.fontFamily = 'Arial, sans-serif';
+    messageDiv.style.color = 'red';
+    messageDiv.style.backgroundColor = 'white';
+    messageDiv.style.padding = '20px';
+    messageDiv.style.border = '2px solid red';
+    messageDiv.style.textAlign = 'center';
+
+    // Append the message div to the body
+    document.body.appendChild(messageDiv);
+  }
+}
+
+// Call the function to check and display the message if expired
+window.onload = displayExpirationMessage;
+
+
+</script>
 </body></html>
       
